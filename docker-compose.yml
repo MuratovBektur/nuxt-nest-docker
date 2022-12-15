@@ -1,0 +1,43 @@
+version: "3.7"
+
+services:
+  nuxt-nest_client:
+    container_name: "nuxt-nest_client"
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+      - HOST=0.0.0.0
+      - NODE_ENV=prod
+    build: client
+    command: npm run start
+    ports:
+      - 3000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./client:/app
+      - ./client/dist:/app/dist
+      - /app/node_modules
+  nuxt-nest_server:
+    container_name: "nuxt-nest_server"
+    restart: always
+    build: server
+    command: npm run start:prod
+    ports:
+      - 5000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./server:/app
+      - /app/node_modules
+  nuxt-nest_nginx:
+    image: nginx
+    restart: "no"
+    container_name: "nuxt-nest_nginx"
+    ports:
+      - 80:80
+    depends_on:
+      - nuxt-nest_server
+      - nuxt-nest_client
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./nginx/dev:/etc/nginx/nuxt-nest
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+
