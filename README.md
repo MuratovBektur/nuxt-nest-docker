@@ -1,0 +1,1 @@
+For run in prod mode - just enter command: ./restart (for dev mode: ./restart-dev)
