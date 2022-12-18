@@ -13,6 +13,8 @@ services:
     command: npm run dev
     ports:
       - 3000
+      # nuxt hmr port
+      - 24678:24678
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./client:/app
