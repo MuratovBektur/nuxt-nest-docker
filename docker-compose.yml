@@ -3,11 +3,9 @@ version: "3.7"
 services:
   nuxt-nest_client:
     container_name: "nuxt-nest_client"
-    environment: 
-      - NODE_ENV=prod
     build: client
     command: npm run start
-    ports:
+    expose:
       - 3000
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -17,7 +15,7 @@ services:
     restart: always
     build: server
     command: npm run start:prod
-    ports:
+    expose:
       - 5000
     volumes:
       - /etc/localtime:/etc/localtime:ro
