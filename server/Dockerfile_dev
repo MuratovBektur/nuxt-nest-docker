@@ -1,5 +1,4 @@
 FROM node:18
-ENV PORT=5000
 
 WORKDIR /app
 
@@ -9,3 +8,5 @@ RUN yarn install
 
 COPY . .
 RUN chown -R node:node ./node_modules
+
+CMD [ -d "node_modules" ] && npm run dev || npm ci && npm run dev

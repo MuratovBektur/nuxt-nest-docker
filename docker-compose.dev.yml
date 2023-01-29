@@ -1,4 +1,4 @@
-version: "3.7"
+version: "3.8"
 
 services:
   nuxt-nest_client:
@@ -6,7 +6,6 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile_dev
-    command: npm run dev
     expose:
       - 3000
     ports:
@@ -15,21 +14,17 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./client:/app
-      - ./client/dist:/app/dist
-      - /app/node_modules
   nuxt-nest_server:
     container_name: "nuxt-nest_server"
     restart: always
     build:
       context: server
       dockerfile: Dockerfile_dev
-    command: npm run start:dev
     expose:
       - 5000
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./server:/app
-      - /app/node_modules
   nuxt-nest_nginx:
     image: nginx
     restart: "no"
