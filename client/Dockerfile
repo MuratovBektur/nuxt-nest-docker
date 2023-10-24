@@ -1,10 +1,11 @@
 FROM node:18
 
 WORKDIR /app
-COPY package*.json ./
+
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install
 COPY . .
 
-RUN npm ci && npm cache clean --force
-RUN npm run build
+RUN yarn run build

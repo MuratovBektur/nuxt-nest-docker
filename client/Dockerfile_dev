@@ -2,11 +2,12 @@ FROM node:18
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install
 
 COPY . .
 RUN chown -R node:node ./node_modules 
 
-CMD [ -d "node_modules" ] && npm run dev || npm ci && npm run dev
+CMD [ -d "node_modules" ] && yarn dev || yarn install --frozen-lockfile && yarn dev
