@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20
 
 WORKDIR /app
 
@@ -8,6 +8,5 @@ COPY yarn.lock ./
 RUN yarn install
 
 COPY . .
-RUN chown -R node:node ./node_modules 
 
 CMD [ -d "node_modules" ] && yarn dev || yarn install --frozen-lockfile && yarn dev

@@ -19,6 +19,10 @@ services:
     build:
       context: server
       dockerfile: Dockerfile_dev
+    # выставляем права чтобы можно 
+    # созданные файлы через docker контейнер
+    # могли быть изменнены на хосте
+    user: 1000:1000
     expose:
       - 5000
     volumes:
